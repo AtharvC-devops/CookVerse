@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CookVerse - Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="cookverse.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    
+    <nav class="bg-white text-gray-700 p-4 flex justify-between items-center shadow-md sticky top-0 z-10">
+        <div class="text-2xl font-bold text-green-600">
+            <a href="index.html">🍳 CookVerse</a>
+        </div>
+        <div class="space-x-4">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="recipes.html" class="nav-link-active">Recipes</a>
+            <a href="notifications.html" class="nav-link">Notifications</a>
+            <a href="subscriptions.html" class="nav-link">Subscriptions</a>
+            <a href="settings.html" class="nav-link">Settings</a>
+        </div>
+    </nav>
+
+    <header class="text-center py-10 bg-white border-b border-gray-200">
+        <h1 class="text-3xl font-bold text-green-800">Search Results</h1>
+        <p class="text-gray-500 mt-2">Showing results for: <span id="search-query" class="font-semibold text-gray-700"></span></p>
+    </header>
+
+    <main class="p-8 max-w-4xl mx-auto">
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 p-4 mb-8 rounded-lg" role="alert">
+            <p class="font-bold">Placeholder Notice</p>
+            <p>In a live application, this area would populate with a list of recipes matching your search query. This static page confirms your search is working!</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="recipe-card bg-white p-6 shadow-md border-t-2 border-green-500">
+                <h3 class="text-xl font-bold text-green-600">Sample Recipe 1</h3>
+                <p class="text-gray-600">A delicious meal that loosely matches your term.</p>
+            </div>
+            <div class="recipe-card bg-white p-6 shadow-md border-t-2 border-green-500">
+                <h3 class="text-xl font-bold text-green-600">Sample Recipe 2</h3>
+                <p class="text-gray-600">Another great option to try tonight.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="api.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() {
+            // Get the query parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let query = urlParams.get('query');
+            
+            // Decode the URI component (e.g., replace '+' with space)
+            if (query) {
+                query = decodeURIComponent(query.replace(/\+/g, ' '));
+            } else {
+                query = "No query entered";
+            }
+
+            // Display the query on the page
+            document.getElementById('search-query').textContent = `"${query}"`;
+            
+            // Search for recipes if query exists
+            if (query && query !== "No query entered") {
+                try {
+                    const response = await api.searchRecipes(query);
+                    const recipes = response.recipes;
+                    
+                    // Update the results section
+                    const resultsContainer = document.querySelector('.grid');
+                    resultsContainer.innerHTML = '';
+                    
+                    if (recipes.length > 0) {
+                        recipes.forEach(recipe => {
+                            const recipeCard = document.createElement('div');
+                            recipeCard.className = 'recipe-card bg-white p-6 shadow-md border-t-2 border-green-500';
+                            recipeCard.innerHTML = `
+                                <h3 class="text-xl font-bold text-green-600">${recipe.title}</h3>
+                                <p class="text-gray-600 mb-2">${recipe.description}</p>
+                                <div class="text-sm text-gray-500 mb-3">
+                                    <span class="inline-block bg-gray-100 px-2 py-1 rounded mr-2">${recipe.category}</span>
+                                    <span class="inline-block bg-gray-100 px-2 py-1 rounded mr-2">${recipe.difficulty}</span>
+                                    <span class="inline-block bg-gray-100 px-2 py-1 rounded">${recipe.prepTime + recipe.cookTime} min</span>
+                                </div>
+                                <a href="recipes-${recipe.category}.html" class="text-green-600 hover:text-green-800 font-semibold">View Recipe →</a>
+                            `;
+                            resultsContainer.appendChild(recipeCard);
+                        });
+                    } else {
+                        resultsContainer.innerHTML = `
+                            <div class="col-span-2 text-center py-8">
+                                <p class="text-gray-500 text-lg">No recipes found for "${query}"</p>
+                                <p class="text-gray-400 mt-2">Try searching with different keywords</p>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Search error:', error);
+                    const resultsContainer = document.querySelector('.grid');
+                    resultsContainer.innerHTML = `
+                        <div class="col-span-2 text-center py-8">
+                            <p class="text-red-500 text-lg">Search failed. Please try again.</p>
+                        </div>
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

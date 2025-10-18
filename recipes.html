@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CookVerse | Recipes Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="cookverse.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+<nav class="bg-white text-gray-700 p-4 flex justify-between items-center shadow-md sticky top-0 z-10">
+    <div class="text-2xl font-bold text-green-600">
+      <a href="index.html">🍳 CookVerse</a>
+    </div>
+    <div class="space-x-4">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="recipes.html" class="nav-link-active">Recipes</a>
+      <a href="notifications.html" class="nav-link">Notifications</a>
+      <a href="subscriptions.html" class="nav-link">Subscriptions</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+</nav>
+
+<header class="text-center py-16 bg-green-50 border-b border-gray-200">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl font-bold text-green-800 mb-3">Find Your Next Culinary Adventure</h1>
+      <p class="text-gray-600 max-w-3xl mx-auto text-lg mb-6">Browse thousands of recipes by popular cuisine and categories.</p>
+      
+      <!-- Upload Button for Premium Users -->
+      <div class="flex justify-center">
+        <button id="uploadRecipeBtn" class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-300 transform hover:scale-105">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+          Upload Your Recipe
+        </button>
+      </div>
+    </div>
+</header>
+
+<main class="container mx-auto py-12 px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        
+        <a href="recipes-indian.html" class="recipe-card">
+            <img src="assets/Images/chiken.jpg" alt="Indian Recipes" class="w-full h-48 object-cover">
+            <div class="recipe-card-content">
+                <h3>Indian Classics 🌶️</h3>
+                <p>Rich, diverse, and aromatic flavors.</p>
+                <button class="btn w-full mt-3">View Collection</button>
+            </div>
+        </a>
+
+        <a href="recipes-italian.html" class="recipe-card">
+            <img src="assets/Images/pizza.jpg" alt="Italian Recipes" class="w-full h-48 object-cover">
+            <div class="recipe-card-content">
+                <h3>Italian Pasta & Pizza 🍝</h3>
+                <p>Timeless comfort food from Italy.</p>
+                <button class="btn w-full mt-3">View Collection</button>
+            </div>
+        </a>
+
+        <a href="recipes-healthy.html" class="recipe-card">
+            <img src="assets/Images/salad.jpg" alt="Healthy Recipes" class="w-full h-48 object-cover">
+            <div class="recipe-card-content">
+                <h3>Healthy & Fit 💪</h3>
+                <p>Nutritious meals for a balanced diet.</p>
+                <button class="btn w-full mt-3">View Collection</button>
+            </div>
+        </a>
+
+        <a href="recipes-desserts.html" class="recipe-card">
+            <img src="assets/Images/panna.jpg" alt="Dessert Recipes" class="w-full h-48 object-cover">
+            <div class="recipe-card-content">
+                <h3>Sweet Desserts 🍰</h3>
+                <p>Treats to satisfy your sweet tooth.</p>
+                <button class="btn w-full mt-3">View Collection</button>
+            </div>
+        </a>
+
+        <a href="recipes-fastfood.html" class="recipe-card">
+            <img src="assets/Images/fries.jpg" alt="Fast Food Recipes" class="w-full h-48 object-cover">
+            <div class="recipe-card-content">
+                <h3>Fast Food Favorites 🍔</h3>
+                <p>Recreate your cravings at home.</p>
+                <button class="btn w-full mt-3">View Collection</button>
+            </div>
+        </a>
+
+        <a href="recipes-japanese.html" class="recipe-card">
+            <img src="assets/Images/sushi.jpg" alt="Japanese Recipes" class="w-full h-48 object-cover">
+            <div class="recipe-card-content">
+                <h3>Japanese Cuisine 🍣</h3>
+                <p>Delicate flavors, perfect balance, and fresh ingredients.</p>
+                <button class="btn w-full mt-3">View Collection</button>
+            </div>
+        </a>
+
+    </div>
+</main>
+<script src="api.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    try {
+      const me = await api.getCurrentUser();
+      const plan = me.user.subscription;
+      if (plan === 'free') {
+        const lockConfigs = [
+          { selector: 'a[href="recipes-japanese.html"]', label: 'Japanese Cuisine 🍣' },
+          { selector: 'a[href="recipes-healthy.html"]', label: 'Healthy & Fit 💪' }
+        ];
+        lockConfigs.forEach(cfg => {
+          const link = document.querySelector(cfg.selector);
+          if (link) {
+            link.classList.add('relative');
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              alert('This category is available on Standard or Premium plans. Apply a coupon to upgrade.');
+            });
+            const overlay = document.createElement('div');
+            overlay.className = 'absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center rounded-lg';
+            overlay.innerHTML = '<span class="px-3 py-1 text-xs font-semibold bg-gray-800 text-white rounded">Locked</span>';
+            link.appendChild(overlay);
+          }
+        });
+      }
+    } catch (err) {
+      // not logged in: treat as free
+      const lockLinks = ['a[href="recipes-japanese.html"]','a[href="recipes-healthy.html"]'];
+      lockLinks.forEach(sel => {
+        const link = document.querySelector(sel);
+        if (link) {
+          link.classList.add('relative');
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Please log in and upgrade to Standard or Premium to access this category.');
+          });
+          const overlay = document.createElement('div');
+          overlay.className = 'absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center rounded-lg';
+          overlay.innerHTML = '<span class="px-3 py-1 text-xs font-semibold bg-gray-800 text-white rounded">Locked</span>';
+          link.appendChild(overlay);
+        }
+      });
+    }
+  });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const uploadBtn = document.getElementById('uploadRecipeBtn');
+      if (!uploadBtn) return;
+
+      // Check user plan
+      let userPlan = 'free';
+      try {
+        const me = await api.getCurrentUser();
+        userPlan = me.user.subscription || 'free';
+      } catch (e) {
+        userPlan = 'free';
+      }
+
+      if (userPlan === 'premium') {
+        uploadBtn.addEventListener('click', function() {
+          window.location.href = 'upload-recipe.html';
+        });
+      } else {
+        uploadBtn.addEventListener('click', function() {
+          alert('This feature is available for Premium users only. Apply coupon PRUM100 to upgrade.');
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

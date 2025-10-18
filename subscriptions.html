@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CookVerse - Subscriptions</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="cookverse.css">
+</head>
+<body class="bg-gray-50 font-sans">
+  
+  <nav class="bg-white text-gray-700 p-4 flex justify-between items-center shadow-md">
+    <div class="text-2xl font-bold text-green-600">
+      <a href="index.html">🍳 CookVerse</a>
+    </div>
+    <div class="space-x-4">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="recipes.html" class="nav-link">Recipes</a>
+      <a href="notifications.html" class="nav-link">Notifications</a>
+      <a href="subscriptions.html" class="nav-link-active">Subscriptions</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+  </nav>
+
+  <header class="text-center py-10 bg-white border-b border-gray-200">
+    <h1 class="text-3xl font-bold text-green-800">Subscription Plans 💳</h1>
+    <p class="text-gray-500">Choose the plan that fits your culinary ambitions.</p>
+  </header>
+
+  <main class="p-8 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+    
+    <div class="subscription-plan bg-white p-6 rounded-lg shadow-lg border-t-4 border-gray-300">
+      <img src="assets/Images/free.png" alt="Basic Cooking Icon" class="w-16 h-16 mx-auto mb-4">
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Free</h2>
+      <p class="text-gray-500 mb-4">Access limited recipes, perfect for a taste of CookVerse.</p>
+      <ul class="text-sm text-gray-600 text-left space-y-1 mb-6 list-disc list-inside">
+        <li>Browse all categories</li>
+        <li>View basic recipes (ingredients + steps)</li>
+        <li>Access YouTube tutorial links</li>
+        <li class="text-gray-400">View-only (no save/comment)</li>
+      </ul>
+      <button class="w-full py-2 bg-gray-400 text-white font-semibold rounded-lg cursor-not-allowed subscription-btn">Current Plan</button>
+    </div>
+    
+    <div class="subscription-plan bg-white p-6 rounded-lg shadow-2xl border-t-4 border-green-600 transform scale-105">
+      <img src="assets/Images/standard.png" alt="Recipe Card Icon" class="w-16 h-16 mx-auto mb-4">
+      <h2 class="text-3xl font-extrabold text-green-600 mb-2">Standard</h2>
+      <p class="text-gray-600 mb-4 font-semibold">Personalization and convenience for regular food lovers.</p>
+      <ul class="text-sm text-gray-600 text-left space-y-1 mb-6 list-disc list-inside">
+        <li>Unlimited access to all recipes</li>
+        <li>Create personal collections (save/favorite)</li>
+        <li>Comment, rate, and review recipes</li>
+      </ul>
+      <button class="w-full py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-300 subscription-btn">Upgrade to Standard</button>
+    </div>
+
+    <div class="subscription-plan bg-white p-6 rounded-lg shadow-lg border-t-4 border-yellow-500">
+      <img src="assets/Images/premium.png" alt="Premium Gold Icon" class="w-16 h-16 mx-auto mb-4">
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Premium</h2>
+      <p class="text-gray-500 mb-4">For serious enthusiasts and creators.</p>
+      <ul class="text-sm text-gray-600 text-left space-y-1 mb-6 list-disc list-inside">
+        <li>All Standard features</li>
+        <li>Exclusive premium recipes</li>
+        <li>Advanced/exclusive video tutorials</li>
+        <li>Upload your own recipes and get featured</li>
+        <li>Early access to new features/recipe drops</li>
+      </ul>
+      <button class="w-full py-2 bg-yellow-600 text-white font-semibold rounded-lg hover:bg-yellow-700 transition duration-300 subscription-btn">Upgrade to Premium</button>
+    </div>
+  </main>
+
+  <section class="max-w-md mx-auto mt-4 bg-white p-4 rounded-lg shadow">
+    <h2 class="text-lg font-semibold text-gray-800 mb-2">Have a coupon?</h2>
+    <div class="flex gap-2">
+      <input id="couponInput" type="text" placeholder="Enter code (STAN100 / PRUM100)" class="flex-1 p-2 border border-gray-300 rounded">
+      <button id="applyCouponBtn" class="px-4 bg-green-600 text-white rounded hover:bg-green-700">Apply</button>
+    </div>
+    <p id="couponMsg" class="text-sm mt-2 text-gray-600 hidden"></p>
+  </section>
+
+  <script src="api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        // Check authentication
+        if (!AuthUtils.isLoggedIn()) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        try {
+            // Load user's current subscription status
+            const statusResponse = await api.getSubscriptionStatus();
+            const currentPlan = statusResponse.currentPlan;
+            
+            // Update UI to show current plan
+            const planCards = document.querySelectorAll('.subscription-plan');
+            planCards.forEach(card => {
+                const planName = card.querySelector('h2').textContent.toLowerCase();
+                if (planName === currentPlan) {
+                    card.classList.add('ring-2', 'ring-green-500');
+                    const button = card.querySelector('.subscription-btn');
+                    button.textContent = 'Current Plan';
+                    button.classList.add('cursor-not-allowed', 'bg-gray-400');
+                    button.disabled = true;
+                }
+            });
+
+            // If on premium, disable Standard upgrade path too
+            if (currentPlan === 'premium') {
+              const stdCard = Array.from(planCards).find(c => c.querySelector('h2').textContent.toLowerCase() === 'standard');
+              if (stdCard) {
+                const btn = stdCard.querySelector('.subscription-btn');
+                if (btn) {
+                  btn.textContent = 'Not available on Premium';
+                  btn.classList.add('cursor-not-allowed', 'bg-gray-300', 'text-gray-600');
+                  btn.disabled = true;
+                }
+              }
+            }
+            
+            // Disable direct activation; guide users to use coupons instead
+            const buttons = document.querySelectorAll(".subscription-btn");
+            buttons.forEach(btn => {
+              if (!btn.disabled) {
+                btn.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const planCard = btn.closest('.subscription-plan');
+                  const planName = planCard.querySelector('h2').textContent.toLowerCase();
+                  if (planName === 'free') return;
+                  alert('To change plans, please enter a valid coupon code and click Apply.');
+                });
+              }
+            });
+
+            // Coupon redemption
+            const couponInput = document.getElementById('couponInput');
+            const applyCouponBtn = document.getElementById('applyCouponBtn');
+            const couponMsg = document.getElementById('couponMsg');
+
+            if (applyCouponBtn) {
+              applyCouponBtn.addEventListener('click', async () => {
+                const code = (couponInput.value || '').trim();
+                if (!code) {
+                  couponMsg.textContent = 'Please enter a coupon code.';
+                  couponMsg.className = 'text-sm mt-2 text-red-600';
+                  couponMsg.classList.remove('hidden');
+                  return;
+                }
+                try {
+                  applyCouponBtn.textContent = 'Applying...';
+                  applyCouponBtn.disabled = true;
+                  couponMsg.classList.add('hidden');
+
+                  const res = await api.makeRequest('/subscriptions/redeem', {
+                    method: 'POST',
+                    body: JSON.stringify({ code })
+                  });
+
+                  couponMsg.textContent = res.message || 'Coupon applied successfully!';
+                  couponMsg.className = 'text-sm mt-2 text-green-700';
+                  couponMsg.classList.remove('hidden');
+                  // Show notification AFTER successful update
+                  setTimeout(() => {
+                    alert(`Your plan has been updated to ${res.newPlan}.`);
+                    location.reload();
+                  }, 500);
+                } catch (err) {
+                  couponMsg.textContent = err.message || 'Invalid or expired coupon.';
+                  couponMsg.className = 'text-sm mt-2 text-red-600';
+                  couponMsg.classList.remove('hidden');
+                } finally {
+                  applyCouponBtn.textContent = 'Apply';
+                  applyCouponBtn.disabled = false;
+                }
+              });
+            }
+            
+        } catch (error) {
+            console.error('Error loading subscription status:', error);
+        }
+    });
+  </script>
+</body>
+</html>

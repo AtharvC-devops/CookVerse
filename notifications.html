@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CookVerse - Notifications</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="cookverse.css">
+</head>
+<body class="bg-gray-50 font-sans">
+  <nav class="bg-white text-gray-700 p-4 flex justify-between items-center shadow-md">
+    <div class="text-2xl font-bold text-green-600">
+      <a href="index.html">🍳 CookVerse</a>
+    </div>
+    <div class="space-x-4">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="recipes.html" class="nav-link">Recipes</a>
+      <a href="notifications.html" class="nav-link-active">Notifications</a>
+      <a href="subscriptions.html" class="nav-link">Subscriptions</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+  </nav>
+
+  <header class="text-center py-10 bg-white border-b border-gray-200">
+    <h1 class="text-3xl font-bold text-green-800">Your Notifications 🔔</h1>
+    <p class="text-gray-500">Stay up-to-date with CookVerse news.</p>
+  </header>
+
+  <main class="p-6 max-w-3xl mx-auto space-y-4">
+    <div class="notification-item border-l-4 border-green-500 p-4 bg-white shadow-sm hover:shadow-md transition duration-200">
+      <p class="font-medium text-gray-800">New Italian Course added 🍝</p>
+      <span class="text-sm text-gray-400 block mt-1">2h ago</span>
+    </div>
+    <div class="notification-item border-l-4 border-blue-500 p-4 bg-white shadow-sm hover:shadow-md transition duration-200">
+      <p class="font-medium text-gray-800">Premium users get festive recipes 🎉</p>
+      <span class="text-sm text-gray-400 block mt-1">1d ago</span>
+    </div>
+    <div class="notification-item border-l-4 border-yellow-500 p-4 bg-white shadow-sm hover:shadow-md transition duration-200">
+      <p class="font-medium text-gray-800">Try our quick breakfast recipes ☕</p>
+      <span class="text-sm text-gray-400 block mt-1">3d ago</span>
+    </div>
+  </main>
+</body>
+</html>

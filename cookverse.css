@@ -1,0 +1,182 @@
+/* CookVerse Custom Styles
+  Consolidated, modern, and focused on consistency across all pages.
+*/
+
+/* --- Global Body & Typography Reset --- */
+body {
+  /* Using a modern, clean font stack */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Navigation Links --- */
+.nav-link {
+  color: #4b5563; /* Gray-700 */
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem; /* rounded-md */
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: #f3f4f6; /* Gray-100 */
+  color: #059669; /* Green-600 */
+}
+
+.nav-link-active {
+  /* Styles for the current page link */
+  color: #059669; /* Green-600 */
+  font-weight: 700;
+  border-bottom: 3px solid #059669;
+  padding: 0.5rem 0.75rem 0.25rem 0.75rem; /* Adjust padding for border */
+}
+
+/* --- Dashboard Cards --- */
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem;
+  text-decoration: none;
+  border-radius: 0.5rem; /* rounded-lg */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px); /* Lift effect */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Larger shadow */
+}
+
+/* --- Auth Card (Login/Signup) --- */
+.auth-card {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.auth-card input:focus {
+  border-color: #059669; /* Green-600 */
+  outline: none;
+}
+
+/* --- Primary Button --- */
+.btn {
+  background-color: #059669; /* Green-600 */
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  background-color: #047857; /* Green-700 */
+  transform: translateY(-1px);
+}
+
+/* --- Recipe Category/Item Card --- */
+.recipe-card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+.recipe-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-card h3 {
+  font-size: 1.5rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  color: #059669; /* Green-600 */
+  margin-bottom: 0.25rem;
+}
+
+.recipe-card p {
+  color: #4b5563; /* Gray-600 */
+  margin-bottom: 1rem;
+}
+
+.recipe-card-content {
+  padding: 1.5rem;
+}
+
+/* --- Normalize recipe card heights inside existing grids --- */
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 380px; /* normalize overall card height */
+}
+
+/* Ensure consistent thumbnail height across cards */
+.recipe-card img {
+  width: 100%;
+  height: 12rem; /* same as h-48 */
+  object-fit: cover;
+}
+
+/* Make content fill remaining space and keep actions aligned */
+.recipe-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+/* Limit description to two lines to avoid uneven card heights */
+.recipe-card-content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3rem; /* reserve space for two lines */
+}
+
+/* Push the button to the bottom for consistent alignment */
+.recipe-card-content .btn {
+  margin-top: auto;
+}
+
+/* Keep titles to one line and align heights */
+.recipe-card-content h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 1.75rem; /* one line reserve */
+}
+
+/* Ensure grid children stretch to uniform widths/heights */
+.grid {
+  align-items: stretch;
+  justify-items: stretch;
+  grid-auto-flow: row dense;
+}
+.grid .recipe-card {
+  width: 100%;
+}

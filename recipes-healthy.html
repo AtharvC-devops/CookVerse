@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CookVerse | Healthy Recipes</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="cookverse.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+<nav class="bg-white text-gray-700 p-4 flex justify-between items-center shadow-md sticky top-0 z-10">
+    <div class="text-2xl font-bold text-green-600">
+      <a href="index.html">🍳 CookVerse</a>
+    </div>
+    <div class="space-x-4">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="recipes.html" class="nav-link-active">Recipes</a>
+      <a href="notifications.html" class="nav-link">Notifications</a>
+      <a href="subscriptions.html" class="nav-link">Subscriptions</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+</nav>
+
+<header class="text-center py-12 bg-green-50 border-b border-green-200">
+  <h1 class="text-4xl font-bold text-green-700 mb-3">Healthy Recipes 💪</h1>
+  <p class="text-gray-600 max-w-2xl mx-auto">
+    Nutritious and delicious meals to keep you energized and fit.
+  </p>
+</header>
+
+<main class="container mx-auto py-12 px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    
+        <div class="recipe-card">
+        <img src="assets/Images/salad.jpg" alt="Green Salad" class="w-full h-48 object-cover">
+        <div class="recipe-card-content">
+            <h3><a href="green-salad.html" class="hover:underline" target="_blank" rel="noopener noreferrer">Green Salad</a></h3>
+            <p>Fresh veggies with light dressing.</p>
+                        <a href="https://www.youtube.com/watch?v=ln_P2jNCSA0&pp=ygULZ3JlZW4gc2FsYWQ%3D" class="btn w-full text-center inline-block" target="_blank" rel="noopener noreferrer">Cook Now</a>
+        </div>
+    </div>
+    <div class="recipe-card">
+        <img src="assets/Images/smoothie.jpg" alt="Fruit Smoothie" class="w-full h-48 object-cover">
+        <div class="recipe-card-content">
+            <h3><a href="fruit-smoothie.html" class="hover:underline" target="_blank" rel="noopener noreferrer">Fruit Smoothie</a></h3>
+            <p>Refreshing blend of fruits and yogurt.</p>
+                        <a href="https://www.youtube.com/watch?v=yFhu3dm0224&pp=ygUWZnJ1aXQgc21vb3RoaWUgcmVjaXBlcw%3D%3D" class="btn w-full text-center inline-block" target="_blank" rel="noopener noreferrer">Cook Now</a>
+        </div>
+    </div>
+    <div class="recipe-card">
+        <img src="assets/Images/salmon.jpg" alt="Grilled Salmon" class="w-full h-48 object-cover">
+        <div class="recipe-card-content">
+            <h3><a href="grilled-salmon.html" class="hover:underline" target="_blank" rel="noopener noreferrer">Grilled Salmon</a></h3>
+            <p>Omega-3 rich salmon with herbs.</p>
+                        <a href="https://www.youtube.com/watch?v=j7BkpjD-HZ0&pp=ygUOZ3JpbGxlZCBzYWxtb24%3D" class="btn w-full text-center inline-block" target="_blank" rel="noopener noreferrer">Cook Now</a>
+        </div>
+    </div>
+    
+    </div>
+</main>
+
+<footer class="bg-gray-200 py-6 text-center text-gray-600 shadow-inner mt-8">
+  © 2025 CookVerse. All rights reserved.
+</footer>
+
+</body>
+</html>

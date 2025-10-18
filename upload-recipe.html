@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Recipe - CookVerse</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="cookverse.css">
+</head>
+<body class="bg-gray-50 font-sans">
+  
+  <nav class="bg-white text-gray-700 p-4 flex justify-between items-center shadow-md sticky top-0 z-10">
+    <div class="text-2xl font-bold text-green-600">
+      <a href="index.html">🍳 CookVerse</a>
+    </div>
+    <div class="space-x-4">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="recipes.html" class="nav-link">Recipes</a>
+      <a href="notifications.html" class="nav-link">Notifications</a>
+      <a href="subscriptions.html" class="nav-link">Subscriptions</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+  </nav>
+
+  <header class="text-center py-10 bg-white border-b border-gray-200">
+    <h1 class="text-3xl font-bold text-green-800">Upload Your Recipe 🍳</h1>
+    <p class="text-gray-500">Share your culinary creations with the CookVerse community</p>
+  </header>
+
+  <main class="p-8 max-w-4xl mx-auto">
+    <div class="bg-white shadow-lg rounded-lg p-8">
+      <form id="uploadForm" class="space-y-6">
+        
+        <!-- Basic Information -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="recipeTitle" class="block text-sm font-medium text-gray-700 mb-2">Recipe Title *</label>
+            <input type="text" id="recipeTitle" name="title" required 
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                   placeholder="e.g., Grandma's Chocolate Chip Cookies">
+          </div>
+          
+          <div>
+            <label for="recipeCategory" class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
+            <select id="recipeCategory" name="category" required 
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+              <option value="">Select Category</option>
+              <option value="indian">Indian</option>
+              <option value="italian">Italian</option>
+              <option value="healthy">Healthy</option>
+              <option value="desserts">Desserts</option>
+              <option value="fastfood">Fast Food</option>
+              <option value="japanese">Japanese</option>
+              <option value="mexican">Mexican</option>
+              <option value="chinese">Chinese</option>
+              <option value="mediterranean">Mediterranean</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="recipeDescription" class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
+          <textarea id="recipeDescription" name="description" required rows="3"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                    placeholder="Describe your recipe in a few sentences..."></textarea>
+        </div>
+
+        <!-- Timing Information -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label for="prepTime" class="block text-sm font-medium text-gray-700 mb-2">Prep Time (minutes) *</label>
+            <input type="number" id="prepTime" name="prepTime" required min="1"
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                   placeholder="30">
+          </div>
+          
+          <div>
+            <label for="cookTime" class="block text-sm font-medium text-gray-700 mb-2">Cook Time (minutes) *</label>
+            <input type="number" id="cookTime" name="cookTime" required min="1"
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                   placeholder="45">
+          </div>
+          
+          <div>
+            <label for="servings" class="block text-sm font-medium text-gray-700 mb-2">Servings *</label>
+            <input type="number" id="servings" name="servings" required min="1"
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                   placeholder="4">
+          </div>
+        </div>
+
+        <div>
+          <label for="difficulty" class="block text-sm font-medium text-gray-700 mb-2">Difficulty Level *</label>
+          <select id="difficulty" name="difficulty" required 
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+            <option value="">Select Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <!-- Ingredients -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Ingredients *</label>
+          <div id="ingredientsList" class="space-y-3">
+            <div class="flex gap-3">
+              <input type="text" name="ingredientName" placeholder="Ingredient name" 
+                     class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+              <input type="text" name="ingredientAmount" placeholder="Amount" 
+                     class="w-32 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+              <input type="text" name="ingredientUnit" placeholder="Unit" 
+                     class="w-24 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+              <button type="button" onclick="removeIngredient(this)" class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+            </div>
+          </div>
+          <button type="button" onclick="addIngredient()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+            + Add Ingredient
+          </button>
+        </div>
+
+        <!-- Instructions -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Instructions *</label>
+          <div id="instructionsList" class="space-y-3">
+            <div class="flex gap-3">
+              <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-800 rounded-full flex items-center justify-center text-sm font-semibold">1</span>
+              <textarea name="instruction" placeholder="Describe this step..." rows="2"
+                        class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"></textarea>
+              <button type="button" onclick="removeInstruction(this)" class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+            </div>
+          </div>
+          <button type="button" onclick="addInstruction()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+            + Add Step
+          </button>
+        </div>
+
+        <!-- Image and Video -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="imageUrl" class="block text-sm font-medium text-gray-700 mb-2">Image URL *</label>
+            <input type="url" id="imageUrl" name="imageUrl" required
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                   placeholder="https://example.com/recipe-image.jpg">
+            <p class="text-xs text-gray-500 mt-1">Upload your image to a service like Imgur and paste the URL here</p>
+          </div>
+          
+          <div>
+            <label for="youtubeUrl" class="block text-sm font-medium text-gray-700 mb-2">YouTube Video URL</label>
+            <input type="url" id="youtubeUrl" name="youtubeUrl"
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                   placeholder="https://www.youtube.com/watch?v=...">
+            <p class="text-xs text-gray-500 mt-1">Optional: Link to your cooking video</p>
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div>
+          <label for="tips" class="block text-sm font-medium text-gray-700 mb-2">Cooking Tips</label>
+          <textarea id="tips" name="tips" rows="3"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                    placeholder="Share any helpful tips or variations..."></textarea>
+        </div>
+
+        <!-- Tags -->
+        <div>
+          <label for="tags" class="block text-sm font-medium text-gray-700 mb-2">Tags (comma-separated)</label>
+          <input type="text" id="tags" name="tags"
+                 class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
+                 placeholder="vegetarian, quick, spicy, comfort food">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+          <button type="button" onclick="window.history.back()" 
+                  class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+            Cancel
+          </button>
+          <button type="submit" id="submitBtn"
+                  class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold">
+            Upload Recipe
+          </button>
+        </div>
+
+        <div id="uploadMessage" class="hidden mt-4 p-4 rounded-lg"></div>
+      </form>
+    </div>
+  </main>
+
+  <script src="api.js"></script>
+  <script>
+    let ingredientCount = 1;
+    let instructionCount = 1;
+
+    function addIngredient() {
+      ingredientCount++;
+      const container = document.getElementById('ingredientsList');
+      const div = document.createElement('div');
+      div.className = 'flex gap-3';
+      div.innerHTML = `
+        <input type="text" name="ingredientName" placeholder="Ingredient name" 
+               class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+        <input type="text" name="ingredientAmount" placeholder="Amount" 
+               class="w-32 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+        <input type="text" name="ingredientUnit" placeholder="Unit" 
+               class="w-24 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+        <button type="button" onclick="removeIngredient(this)" class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function removeIngredient(button) {
+      if (ingredientCount > 1) {
+        button.parentElement.remove();
+        ingredientCount--;
+      }
+    }
+
+    function addInstruction() {
+      instructionCount++;
+      const container = document.getElementById('instructionsList');
+      const div = document.createElement('div');
+      div.className = 'flex gap-3';
+      div.innerHTML = `
+        <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-800 rounded-full flex items-center justify-center text-sm font-semibold">${instructionCount}</span>
+        <textarea name="instruction" placeholder="Describe this step..." rows="2"
+                  class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"></textarea>
+        <button type="button" onclick="removeInstruction(this)" class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function removeInstruction(button) {
+      if (instructionCount > 1) {
+        button.parentElement.remove();
+        instructionCount--;
+        // Renumber remaining steps
+        const steps = document.querySelectorAll('#instructionsList .flex span');
+        steps.forEach((step, index) => {
+          step.textContent = index + 1;
+        });
+        instructionCount = steps.length;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Check if user is premium
+      try {
+        if (!AuthUtils.isLoggedIn()) {
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        const me = await api.getCurrentUser();
+        if (me.user.subscription !== 'premium') {
+          alert('This feature is available for Premium users only.');
+          window.location.href = 'subscriptions.html';
+          return;
+        }
+      } catch (e) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Handle form submission
+      document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const messageDiv = document.getElementById('uploadMessage');
+        
+        try {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Uploading...';
+          messageDiv.classList.add('hidden');
+
+          // Collect form data
+          const formData = new FormData(e.target);
+          
+          // Collect ingredients
+          const ingredients = [];
+          const ingredientNames = document.querySelectorAll('input[name="ingredientName"]');
+          const ingredientAmounts = document.querySelectorAll('input[name="ingredientAmount"]');
+          const ingredientUnits = document.querySelectorAll('input[name="ingredientUnit"]');
+          
+          for (let i = 0; i < ingredientNames.length; i++) {
+            if (ingredientNames[i].value.trim()) {
+              ingredients.push({
+                name: ingredientNames[i].value.trim(),
+                amount: ingredientAmounts[i].value.trim(),
+                unit: ingredientUnits[i].value.trim()
+              });
+            }
+          }
+
+          // Collect instructions
+          const instructions = [];
+          const instructionTexts = document.querySelectorAll('textarea[name="instruction"]');
+          
+          instructionTexts.forEach((textarea, index) => {
+            if (textarea.value.trim()) {
+              instructions.push({
+                step: index + 1,
+                description: textarea.value.trim()
+              });
+            }
+          });
+
+          // Prepare recipe data
+          const recipeData = {
+            title: formData.get('title'),
+            description: formData.get('description'),
+            category: formData.get('category'),
+            ingredients: ingredients,
+            instructions: instructions,
+            prepTime: parseInt(formData.get('prepTime')),
+            cookTime: parseInt(formData.get('cookTime')),
+            servings: parseInt(formData.get('servings')),
+            difficulty: formData.get('difficulty'),
+            imageUrl: formData.get('imageUrl'),
+            youtubeUrl: formData.get('youtubeUrl') || '',
+            tips: formData.get('tips') || '',
+            tags: formData.get('tags') ? formData.get('tags').split(',').map(tag => tag.trim()) : [],
+            isPremium: true, // User-uploaded recipes are premium
+            createdBy: 'user' // Indicates user-uploaded
+          };
+
+          // Submit to backend (you'll need to add this endpoint)
+          const response = await api.makeRequest('/recipes/upload', {
+            method: 'POST',
+            body: JSON.stringify(recipeData)
+          });
+
+          messageDiv.className = 'mt-4 p-4 rounded-lg bg-green-100 text-green-800';
+          messageDiv.textContent = 'Recipe uploaded successfully! It will be reviewed before being published.';
+          messageDiv.classList.remove('hidden');
+
+          // Reset form
+          e.target.reset();
+          document.getElementById('ingredientsList').innerHTML = `
+            <div class="flex gap-3">
+              <input type="text" name="ingredientName" placeholder="Ingredient name" 
+                     class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+              <input type="text" name="ingredientAmount" placeholder="Amount" 
+                     class="w-32 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+              <input type="text" name="ingredientUnit" placeholder="Unit" 
+                     class="w-24 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+              <button type="button" onclick="removeIngredient(this)" class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+            </div>
+          `;
+          document.getElementById('instructionsList').innerHTML = `
+            <div class="flex gap-3">
+              <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-800 rounded-full flex items-center justify-center text-sm font-semibold">1</span>
+              <textarea name="instruction" placeholder="Describe this step..." rows="2"
+                        class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"></textarea>
+              <button type="button" onclick="removeInstruction(this)" class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+            </div>
+          `;
+          ingredientCount = 1;
+          instructionCount = 1;
+
+        } catch (error) {
+          messageDiv.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
+          messageDiv.textContent = error.message || 'Failed to upload recipe. Please try again.';
+          messageDiv.classList.remove('hidden');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Upload Recipe';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

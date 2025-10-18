@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CookVerse | Italian Recipes</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="cookverse.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+<nav class="bg-white text-gray-700 p-4 flex justify-between items-center shadow-md sticky top-0 z-10">
+    <div class="text-2xl font-bold text-green-600">
+      <a href="index.html">🍳 CookVerse</a>
+    </div>
+    <div class="space-x-4">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="recipes.html" class="nav-link-active">Recipes</a>
+      <a href="notifications.html" class="nav-link">Notifications</a>
+      <a href="subscriptions.html" class="nav-link">Subscriptions</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+</nav>
+
+<header class="text-center py-12 bg-red-100 border-b border-red-200">
+  <h1 class="text-4xl font-bold text-red-700 mb-3">Italian Recipes 🍝</h1>
+  <p class="text-gray-600 max-w-2xl mx-auto">
+    From pasta to pizza, enjoy the timeless classics of Italy.
+  </p>
+</header>
+
+<main class="container mx-auto py-12 px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    
+        <div class="recipe-card">
+        <img src="assets/Images/spaghetti.jpg" alt="Spaghetti Carbonara" class="w-full h-48 object-cover">
+        <div class="recipe-card-content">
+            <h3><a href="spaghetti-carbonara.html" class="hover:underline" target="_blank" rel="noopener noreferrer">Spaghetti Carbonara</a></h3>
+            <p>Creamy pasta with pancetta and parmesan.</p>
+                        <a href="https://www.youtube.com/watch?v=TLpflXrGoEI&pp=ygUQc3BhZ2hldHRpIHJlY2lwZQ%3D%3D" class="btn w-full text-center inline-block" target="_blank" rel="noopener noreferrer">Cook Now</a>
+        </div>
+    </div>
+    <div class="recipe-card">
+        <img src="assets/Images/pizza.jpg" alt="Margherita Pizza" class="w-full h-48 object-cover">
+        <div class="recipe-card-content">
+            <h3><a href="margherita-pizza.html" class="hover:underline" target="_blank" rel="noopener noreferrer">Margherita Pizza</a></h3>
+            <p>Classic pizza with tomato, mozzarella & basil.</p>
+                        <a href="https://www.youtube.com/watch?v=vcfNpDtVqOw&pp=ygUQbWFyZ2hlcml0YSBwaXp6YQ%3D%3D" class="btn w-full text-center inline-block" target="_blank" rel="noopener noreferrer">Cook Now</a>
+        </div>
+    </div>
+    <div class="recipe-card">
+        <img src="assets/Images/lasagna.jpg" alt="Lasagna" class="w-full h-48 object-cover">
+        <div class="recipe-card-content">
+            <h3><a href="lasagna.html" class="hover:underline" target="_blank" rel="noopener noreferrer">Lasagna</a></h3>
+            <p>Layered pasta baked with rich meat sauce.</p>
+                        <a href="https://www.youtube.com/watch?v=LLWqK4cgki8&pp=ygUHbGFnc2FuYQ%3D%3D" class="btn w-full text-center inline-block" target="_blank" rel="noopener noreferrer">Cook Now</a>
+        </div>
+    </div>
+    
+    </div>
+</main>
+
+<footer class="bg-gray-200 py-6 text-center text-gray-600 shadow-inner mt-8">
+  © 2025 CookVerse. All rights reserved.
+</footer>
+
+</body>
+</html>

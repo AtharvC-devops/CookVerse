@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Butter Chicken Recipe - CookVerse</title>
+  <link rel="stylesheet" href="cookverse.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-md py-4">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-orange-600">CookVerse</a>
+      <div class="space-x-4">
+        <a href="recipes.html" class="text-gray-700 hover:text-orange-600">Recipes</a>
+        <a href="search.html" class="text-gray-700 hover:text-orange-600">Search</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto py-12 px-6">
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Left side - Image -->
+      <div class="md:w-1/2">
+        <div>
+          <img src="assets/Images/chiken.jpg" alt="Butter Chicken" class="w-full rounded-lg shadow-md object-cover h-auto max-h-[600px]">
+        </div>
+      </div>
+      
+      <!-- Right side - Recipe details -->
+      <div class="md:w-1/2">
+        <h1 class="text-3xl font-bold text-orange-700 mb-4">Butter Chicken</h1>
+        <div class="flex items-center mb-6">
+          <span class="bg-orange-100 text-orange-800 text-xs font-semibold px-2.5 py-0.5 rounded mr-2">Indian</span>
+          <span class="bg-orange-100 text-orange-800 text-xs font-semibold px-2.5 py-0.5 rounded mr-2">Main Course</span>
+          <span class="text-gray-600 text-sm">Prep time: 30 mins | Cook time: 45 mins</span>
+        </div>
+        
+        <div class="mb-8">
+          <h2 class="text-xl font-semibold mb-2">Ingredients</h2>
+          <ul class="list-disc pl-5 space-y-1 text-gray-700">
+            <li>800g boneless chicken, cut into bite-sized pieces</li>
+            <li>2 cups tomato puree</li>
+            <li>1 cup heavy cream</li>
+            <li>2 tablespoons butter</li>
+            <li>2 tablespoons oil</li>
+            <li>2 onions, finely chopped</li>
+            <li>2 tablespoons ginger-garlic paste</li>
+            <li>2 tablespoons tandoori masala</li>
+            <li>1 tablespoon garam masala</li>
+            <li>1 teaspoon red chili powder (adjust to taste)</li>
+            <li>1 teaspoon turmeric powder</li>
+            <li>Salt to taste</li>
+            <li>Fresh coriander leaves for garnish</li>
+            <li>1 tablespoon dried fenugreek leaves (kasuri methi)</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Instructions</h2>
+          <ol class="list-decimal pl-5 space-y-3 text-gray-700">
+            <li>
+              <strong>Marinate the chicken:</strong> In a bowl, mix chicken pieces with tandoori masala, 1 tablespoon ginger-garlic paste, and salt. Let it marinate for at least 30 minutes, preferably overnight in the refrigerator.
+            </li>
+            <li>
+              <strong>Cook the marinated chicken:</strong> Heat 1 tablespoon oil in a pan and cook the marinated chicken until it's about 80% done. Remove and set aside.
+            </li>
+            <li>
+              <strong>Prepare the gravy:</strong> In the same pan, add the remaining oil and butter. Add chopped onions and sauté until golden brown.
+            </li>
+            <li>
+              <strong>Add spices:</strong> Add the remaining ginger-garlic paste, turmeric powder, red chili powder, and garam masala. Sauté for 1-2 minutes until fragrant.
+            </li>
+            <li>
+              <strong>Add tomato puree:</strong> Pour in the tomato puree and cook until the oil starts to separate from the mixture, about 5-7 minutes.
+            </li>
+            <li>
+              <strong>Add cream:</strong> Lower the heat and add the heavy cream. Stir well to combine.
+            </li>
+            <li>
+              <strong>Add chicken:</strong> Add the partially cooked chicken pieces to the gravy and simmer for 10-15 minutes until the chicken is fully cooked and the gravy thickens.
+            </li>
+            <li>
+              <strong>Final touches:</strong> Crush the dried fenugreek leaves between your palms and sprinkle over the curry. Adjust salt to taste.
+            </li>
+            <li>
+              <strong>Serve:</strong> Garnish with fresh coriander leaves and serve hot with naan or rice.
+            </li>
+          </ol>
+        </div>
+        
+        <div class="mt-8">
+          <h2 class="text-xl font-semibold mb-2">Tips</h2>
+          <ul class="list-disc pl-5 space-y-1 text-gray-700">
+            <li>For a richer flavor, use bone-in chicken pieces and remove the bones before serving.</li>
+            <li>If the gravy is too thick, add a little water or chicken stock to adjust the consistency.</li>
+            <li>The fenugreek leaves add an authentic flavor to butter chicken, try not to skip this ingredient.</li>
+          </ul>
+        </div>
+        
+        <div class="mt-8 flex justify-between items-center">
+          <a href="recipes-indian.html" class="text-orange-600 hover:text-orange-800">← Back to Indian Recipes</a>
+          <a href="https://www.youtube.com/watch?v=a03U45jFxOI&pp=ygUVYnV0dGVyIGNoaWNrZW4gcmVjaXBl" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer">
+            Watch Video Tutorial
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-gray-200 py-6 text-center text-gray-600 shadow-inner mt-8">
+    <p>&copy; 2025 CookVerse. All rights reserved.</p>
+  </footer>
+  <script src="api.js"></script>
+  <script src="recipe-page.js"></script>
+</body>
+</html>
