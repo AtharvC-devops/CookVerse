@@ -28,6 +28,16 @@
       "dest": "api/index.js"
     },
     {
+      "src": "/_vercel(.*)",
+      "status": 301,
+      "headers": { "Location": "/" }
+    },
+    {
+      "src": "/login",
+      "status": 301,
+      "headers": { "Location": "/" }
+    },
+    {
       "src": "/(.*)",
       "headers": {
         "Access-Control-Allow-Origin": "*",
@@ -41,16 +51,6 @@
     },
     {
       "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/login",
-      "status": 307,
-      "dest": "/index.html"
-    },
-    {
-      "src": "/_vercel(.*)",
-      "status": 307,
       "dest": "/index.html"
     },
     {
