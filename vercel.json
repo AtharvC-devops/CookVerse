@@ -44,6 +44,16 @@
       "dest": "/index.html"
     },
     {
+      "src": "/login",
+      "status": 307,
+      "dest": "/index.html"
+    },
+    {
+      "src": "/_vercel(.*)",
+      "status": 307,
+      "dest": "/index.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
