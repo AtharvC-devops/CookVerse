@@ -3,7 +3,12 @@
 
 class CookVerseAPI {
   constructor() {
-    this.baseURL = 'http://localhost:5000/api';
+    // Use a public API URL that works from anywhere
+    // For development, use the current hostname; for production, use your deployed URL
+    const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+    this.baseURL = isProduction 
+      ? 'https://cookverse-api.vercel.app/api'  // Replace with your actual deployed API URL
+      : `http://${window.location.hostname}:5000/api`;
     this.token = localStorage.getItem('cookverse_token');
   }
 
