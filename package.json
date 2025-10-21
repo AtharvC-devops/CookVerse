@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Backend API for CookVerse cooking recipe website",
   "main": "server.js",
+  "vercel": {
+    "public": true,
+    "skipVercelAuth": true
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
