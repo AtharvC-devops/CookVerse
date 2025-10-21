@@ -1,0 +1,8 @@
+# Redirect all Vercel authentication pages to the main site
+/_vercel/*      /              301
+/auth/*         /              301
+/login          /              301
+/authentication/* /            301
+
+# Ensure all paths are accessible
+/*             /:splat        200
